@@ -1,0 +1,44 @@
+name: Tests and package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15-intel, windows-2025]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install development dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Test dispatch, config, setup, schema, and process handling
+        run: python -m unittest discover -s tests -v
+      - name: Build wheel and source distribution
+        run: python -m build
+      - name: Install wheel into separate environment
+        shell: bash
+        run: |
+          python -m venv .venv-smoke
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            .venv-smoke/Scripts/python -m pip install --no-deps dist/*.whl
+            .venv-smoke/Scripts/python scripts/smoke_install.py
+          else
+            .venv-smoke/bin/python -m pip install --no-deps dist/*.whl
+            .venv-smoke/bin/python scripts/smoke_install.py
+          fi

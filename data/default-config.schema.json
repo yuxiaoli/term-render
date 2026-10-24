@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "term-render default configuration",
+  "description": "Structure inferred from configs/default-config.json. Tool identifiers and extension names are dictionaries rather than fixed lists. Application-specific validation is defined by config.schema.json and the runtime validator.",
+  "type": "object",
+  "required": [
+    "version",
+    "tools",
+    "extensions",
+    "pending"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/tool"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/routes"
+      }
+    },
+    "fallbacks": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/routes"
+      },
+      "description": "Optional fallback routes used when a primary route is unavailable or its renderer fails."
+    },
+    "pending": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "required": [
+        "platforms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "platforms": {
+          "type": "object",
+          "required": [
+            "windows",
+            "macos",
+            "linux"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "windows": {
+              "$ref": "#/$defs/command"
+            },
+            "macos": {
+              "$ref": "#/$defs/command"
+            },
+            "linux": {
+              "$ref": "#/$defs/command"
+            }
+          }
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "executable",
+        "healthcheck",
+        "install"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "executable": {
+          "type": "string"
+        },
+        "healthcheck": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "install": {
+          "type": "string"
+        }
+      }
+    },
+    "routes": {
+      "type": "object",
+      "required": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "windows": {
+          "$ref": "#/$defs/route"
+        },
+        "macos": {
+          "$ref": "#/$defs/route"
+        },
+        "linux": {
+          "$ref": "#/$defs/route"
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "required": [
+        "tool",
+        "args"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "output_extension": {
+          "enum": [
+            ".md",
+            ".txt"
+          ]
+        }
+      }
+    }
+  }
+}

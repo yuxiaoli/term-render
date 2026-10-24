@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "term-render configuration v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "tools",
+    "extensions"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "tools": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9][a-z0-9_-]*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/tool"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/extension"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/routes"
+      }
+    },
+    "fallbacks": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/extension"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/routes"
+      },
+      "description": "Optional fallback routes used when a primary route is unavailable or its renderer fails."
+    },
+    "pending": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/extension"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!.*\\u0000)[\\s\\S]*\\S[\\s\\S]*$"
+      }
+    }
+  },
+  "$defs": {
+    "extension": {
+      "type": "string",
+      "pattern": "^\\.[a-z0-9][a-z0-9_-]*$"
+    },
+    "tool": {
+      "type": "object",
+      "required": [
+        "platforms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "platforms": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "windows": {
+              "$ref": "#/$defs/command"
+            },
+            "macos": {
+              "$ref": "#/$defs/command"
+            },
+            "linux": {
+              "$ref": "#/$defs/command"
+            }
+          }
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "healthcheck",
+        "install"
+      ],
+      "properties": {
+        "executable": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!.*\\.[bB][aA][tT]$)(?!.*\\.[cC][mM][dD]$)[^{}\\u0000]*\\S[^{}\\u0000]*$",
+          "description": "Native executable name on PATH, or absolute native executable path. No shell aliases or batch files."
+        },
+        "healthcheck": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[^{}\\u0000]*$"
+          },
+          "description": "Noninteractive read-only arguments, for example --help. No file placeholder."
+        },
+        "install": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!.*\\u0000)[\\s\\S]*\\S[\\s\\S]*$"
+        }
+      }
+    },
+    "routes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "windows": {
+          "$ref": "#/$defs/route"
+        },
+        "macos": {
+          "$ref": "#/$defs/route"
+        },
+        "linux": {
+          "$ref": "#/$defs/route"
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "args"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!.*\\u0000)[\\s\\S]*\\S[\\s\\S]*$"
+        },
+        "args": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^(?:\\{file\\}|\\{output\\}|[^{}\\u0000]*)$"
+          },
+          "contains": {
+            "const": "{file}"
+          },
+          "minContains": 1,
+          "maxContains": 1,
+          "description": "Literal argv elements; exactly one {file}, plus exactly one {output} for conversion routes."
+        },
+        "output_extension": {
+          "enum": [
+            ".md",
+            ".txt"
+          ],
+          "description": "Convert into a temporary file with this suffix, then dispatch it through its configured renderer."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "output_extension"
+            ]
+          },
+          "then": {
+            "properties": {
+              "args": {
+                "contains": {
+                  "const": "{output}"
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "args": {
+                "not": {
+                  "contains": {
+                    "const": "{output}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "description": "Runtime validation additionally rejects duplicate JSON keys, unknown tool/platform references, conversion cycles, missing conversion target renderers, and overlap between pending and routed extensions. Primary and optional fallback routes use the same structure. Custom files fully replace defaults."
+}

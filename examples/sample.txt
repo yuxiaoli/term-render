@@ -1,0 +1,2 @@
+Hello from term-render.
+Plain text is displayed by Rich-CLI's text lexer.

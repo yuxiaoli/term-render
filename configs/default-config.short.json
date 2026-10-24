@@ -1,0 +1,1238 @@
+{
+  "version": 1,
+  "tools": {
+    "glow": {
+      "platforms": {
+        "windows": {
+          "executable": "glow",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/charmbracelet/glow/releases or run winget install charmbracelet.glow yourself."
+        },
+        "macos": {
+          "executable": "glow",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/charmbracelet/glow or run brew install glow yourself."
+        },
+        "linux": {
+          "executable": "glow",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review Linux packages at https://github.com/charmbracelet/glow#installation."
+        }
+      }
+    },
+    "tidy-viewer": {
+      "platforms": {
+        "windows": {
+          "executable": "tidy-viewer",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Get the Windows tidy-viewer binary from https://github.com/alexhallam/tv/releases; tv may be an unrelated tool."
+        },
+        "macos": {
+          "executable": "tidy-viewer",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/alexhallam/tv or run brew install tidy-viewer yourself."
+        },
+        "linux": {
+          "executable": "tidy-viewer",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/alexhallam/tv or run cargo install tidy-viewer yourself."
+        }
+      }
+    },
+    "doxx": {
+      "platforms": {
+        "windows": {
+          "executable": "doxx",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Get x86_64-pc-windows-msvc from https://github.com/bgreenwell/doxx/releases or run cargo install doxx yourself."
+        },
+        "macos": {
+          "executable": "doxx",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/bgreenwell/doxx or run brew install bgreenwell/tap/doxx yourself."
+        },
+        "linux": {
+          "executable": "doxx",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/bgreenwell/doxx/releases or run cargo install doxx yourself."
+        }
+      }
+    },
+    "xleak": {
+      "platforms": {
+        "windows": {
+          "executable": "xleak",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Get a Windows standalone executable from https://github.com/bgreenwell/xleak/releases or run cargo install xleak yourself."
+        },
+        "macos": {
+          "executable": "xleak",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/bgreenwell/xleak or run brew install bgreenwell/tap/xleak yourself."
+        },
+        "linux": {
+          "executable": "xleak",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/bgreenwell/xleak/releases or run cargo install xleak yourself."
+        }
+      }
+    },
+    "rich-cli": {
+      "platforms": {
+        "windows": {
+          "executable": "rich",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/Textualize/rich-cli; install rich-cli (not the rich library alone), e.g. pipx install rich-cli."
+        },
+        "macos": {
+          "executable": "rich",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/Textualize/rich-cli; install rich-cli (not the rich library alone), e.g. pipx install rich-cli."
+        },
+        "linux": {
+          "executable": "rich",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/Textualize/rich-cli; install rich-cli (not the rich library alone), e.g. pipx install rich-cli."
+        }
+      }
+    },
+    "pdfly": {
+      "platforms": {
+        "windows": {
+          "executable": "pdfly",
+          "healthcheck": [
+            "extract-text"
+          ],
+          "install": "Install the PDF text viewer with uv tool install pdfly (or pipx install pdfly). Review https://github.com/py-pdf/pdfly. Scanned PDFs need OCR; page images are not displayed."
+        },
+        "macos": {
+          "executable": "pdfly",
+          "healthcheck": [
+            "extract-text"
+          ],
+          "install": "Install the PDF text viewer with uv tool install pdfly (or pipx install pdfly). Review https://github.com/py-pdf/pdfly. Scanned PDFs need OCR; page images are not displayed."
+        },
+        "linux": {
+          "executable": "pdfly",
+          "healthcheck": [
+            "extract-text"
+          ],
+          "install": "Install the PDF text viewer with uv tool install pdfly (or pipx install pdfly). Review https://github.com/py-pdf/pdfly. Scanned PDFs need OCR; page images are not displayed."
+        }
+      }
+    },
+    "bat": {
+      "platforms": {
+        "windows": {
+          "executable": "bat",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/sharkdp/bat/releases or install bat with your package manager, e.g. winget install sharkdp.bat."
+        },
+        "macos": {
+          "executable": "bat",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/sharkdp/bat or run brew install bat yourself."
+        },
+        "linux": {
+          "executable": "bat",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/sharkdp/bat#installation. Debian/Ubuntu may name the executable batcat; set executable to batcat in your config if needed."
+        }
+      }
+    },
+    "viu": {
+      "platforms": {
+        "windows": {
+          "executable": "viu",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/atanunq/viu/releases or run cargo install viu yourself."
+        },
+        "macos": {
+          "executable": "viu",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/atanunq/viu or run brew install viu yourself."
+        },
+        "linux": {
+          "executable": "viu",
+          "healthcheck": [
+            "--version"
+          ],
+          "install": "Review https://github.com/atanunq/viu or run cargo install viu yourself."
+        }
+      }
+    },
+    "anydoc": {
+      "platforms": {
+        "windows": {
+          "executable": "anydoc",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/firecrawl/anydoc and install the CLI with npm install -g @firecrawl/anydoc (Node.js 20+). Converts locally to Markdown; scanned PDFs require OCR."
+        },
+        "macos": {
+          "executable": "anydoc",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/firecrawl/anydoc and install the CLI with npm install -g @firecrawl/anydoc (Node.js 20+). Converts locally to Markdown; scanned PDFs require OCR."
+        },
+        "linux": {
+          "executable": "anydoc",
+          "healthcheck": [
+            "--help"
+          ],
+          "install": "Review https://github.com/firecrawl/anydoc and install the CLI with npm install -g @firecrawl/anydoc (Node.js 20+). Converts locally to Markdown; scanned PDFs require OCR."
+        }
+      }
+    }
+  },
+  "extensions": {
+    ".md": {
+      "windows": {
+        "tool": "glow",
+        "args": [
+          "{file}"
+        ]
+      },
+      "macos": {
+        "tool": "glow",
+        "args": [
+          "{file}"
+        ]
+      },
+      "linux": {
+        "tool": "glow",
+        "args": [
+          "{file}"
+        ]
+      }
+    },
+    ".csv": {
+      "windows": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      },
+      "macos": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      },
+      "linux": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      }
+    },
+    ".tsv": {
+      "windows": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      },
+      "macos": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      },
+      "linux": {
+        "tool": "tidy-viewer",
+        "args": [
+          "--delimiter"
+        ]
+      }
+    },
+    ".docx": {
+      "windows": {
+        "tool": "doxx",
+        "args": [
+          "{file}"
+        ]
+      },
+      "macos": {
+        "tool": "doxx",
+        "args": [
+          "{file}"
+        ]
+      },
+      "linux": {
+        "tool": "doxx",
+        "args": [
+          "{file}"
+        ]
+      }
+    },
+    ".xlsx": {
+      "windows": {
+        "tool": "xleak",
+        "args": [
+          "{file}"
+        ]
+      },
+      "macos": {
+        "tool": "xleak",
+        "args": [
+          "{file}"
+        ]
+      },
+      "linux": {
+        "tool": "xleak",
+        "args": [
+          "{file}"
+        ]
+      }
+    },
+    ".json": {
+      "windows": {
+        "tool": "rich-cli",
+        "args": [
+          "--json"
+        ]
+      },
+      "macos": {
+        "tool": "rich-cli",
+        "args": [
+          "--json"
+        ]
+      },
+      "linux": {
+        "tool": "rich-cli",
+        "args": [
+          "--json"
+        ]
+      }
+    },
+    ".txt": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".yaml": {
+      "windows": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "macos": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "linux": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      }
+    },
+    ".yml": {
+      "windows": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "macos": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "linux": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      }
+    },
+    ".toml": {
+      "windows": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "macos": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      },
+      "linux": {
+        "tool": "rich-cli",
+        "args": [
+          "--syntax"
+        ]
+      }
+    },
+    ".pdf": {
+      "windows": {
+        "tool": "pdfly",
+        "args": [
+          "extract-text"
+        ]
+      },
+      "macos": {
+        "tool": "pdfly",
+        "args": [
+          "extract-text"
+        ]
+      },
+      "linux": {
+        "tool": "pdfly",
+        "args": [
+          "extract-text"
+        ]
+      }
+    },
+    ".log": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".py": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".js": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".ts": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".sh": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".ps1": {
+      "windows": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "macos": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      },
+      "linux": {
+        "tool": "bat",
+        "args": [
+          "--paging=never"
+        ]
+      }
+    },
+    ".png": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".jpg": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".jpeg": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".gif": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--once"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--once"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--once"
+        ]
+      }
+    },
+    ".bmp": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".webp": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".tif": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".tiff": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    },
+    ".ico": {
+      "windows": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "macos": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      },
+      "linux": {
+        "tool": "viu",
+        "args": [
+          "--"
+        ]
+      }
+    }
+  },
+  "fallbacks": {
+    ".doc": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".docm": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".ppt": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".pps": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".pot": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".pptx": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".pptm": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".ppsx": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".ppsm": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".xls": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".xlsm": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".xlsb": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".odt": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".ods": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".odp": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".rtf": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".epub": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".docx": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".xlsx": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".pdf": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    },
+    ".csv": {
+      "windows": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "macos": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      },
+      "linux": {
+        "tool": "anydoc",
+        "args": [
+          "{file}"
+        ],
+        "output_extension": ".md"
+      }
+    }
+  },
+  "pending": {}
+}

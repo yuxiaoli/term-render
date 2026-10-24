@@ -1,0 +1,144 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-installers-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: ${{ matrix.platform }} / ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            platform: windows
+            arch: x86_64
+            python_arch: x64
+            native_python: .native-venv/Scripts/python.exe
+          - os: macos-15-intel
+            platform: macos
+            arch: x86_64
+            python_arch: x64
+            native_python: .native-venv/bin/python
+          - os: macos-15
+            platform: macos
+            arch: arm64
+            python_arch: arm64
+            native_python: .native-venv/bin/python
+          - os: ubuntu-22.04
+            platform: linux
+            arch: x86_64
+            python_arch: x64
+            native_python: .native-venv/bin/python
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+      TARGET_ARCH: ${{ matrix.arch }}
+      NATIVE_PYTHON: ${{ matrix.native_python }}
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: Check out release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+          architecture: ${{ matrix.python_arch }}
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.12.0'
+          enable-cache: false
+      - name: Create the native build environment
+        run: uv venv --python python .native-venv
+      - name: Validate source version and native architecture
+        id: release
+        run: >-
+          uv run --no-project --python "$NATIVE_PYTHON" python scripts/native/release.py check --source .
+          --tag "$RELEASE_TAG" --arch "$TARGET_ARCH"
+          --github-output "$GITHUB_OUTPUT"
+      - name: Install the released package and pinned freezer
+        run: uv pip install --python "$NATIVE_PYTHON" 'pyinstaller==6.22.3' '.[dev]'
+      - name: Run application tests
+        run: uv run --no-project --python "$NATIVE_PYTHON" python -m unittest discover -s tests -v
+      - name: Check version consistency
+        run: uv run --no-project --python "$NATIVE_PYTHON" python -c 'from term_render import __version__; import os; assert "v" + __version__ == os.environ["RELEASE_TAG"]'
+      - name: Install Linux package builder
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes rpm
+      - name: Freeze and smoke-test the standalone executable
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        run: >-
+          uv run --no-project --python "$NATIVE_PYTHON" python scripts/native/build.py --source .
+          --output-dir output/frozen --version "$RELEASE_VERSION"
+      - name: Build and install-test the Windows installer
+        if: runner.os == 'Windows'
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        run: >-
+          uv run --no-project --python "$NATIVE_PYTHON" python scripts/native/package_windows.py --binary output/frozen/render.exe
+          --output-dir output/installers --version "$RELEASE_VERSION" --arch "$TARGET_ARCH"
+      - name: Build and install-test native Unix packages
+        if: runner.os != 'Windows'
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        run: >-
+          uv run --no-project --python "$NATIVE_PYTHON" python scripts/native/package_unix.py --binary output/frozen/render
+          --output-dir output/installers --version "$RELEASE_VERSION" --arch "$TARGET_ARCH"
+      - name: Record source provenance and package hashes
+        run: >-
+          uv run --no-project --python "$NATIVE_PYTHON" python scripts/native/release.py record --source . --tag "$RELEASE_TAG"
+          --arch "$TARGET_ARCH" --directory output/installers
+      - name: Save verified installers
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: native-${{ matrix.platform }}-${{ matrix.arch }}
+          path: output/installers/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: native-*
+          path: artifacts
+      - name: Create draft, verify assets, and publish complete release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          if ! gh release view "$RELEASE_TAG" --repo "$RELEASE_REPO" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --repo "$RELEASE_REPO" --verify-tag --draft --title "term-render $RELEASE_TAG" --notes-file docs/RELEASE_NOTES.md
+          fi
+          python scripts/native/release.py upload --tag "$RELEASE_TAG" --repo "$RELEASE_REPO" --directory artifacts
+          gh release edit "$RELEASE_TAG" --repo "$RELEASE_REPO" --draft=false --latest
